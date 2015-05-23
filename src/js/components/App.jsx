@@ -7,16 +7,26 @@ var LeapState = React.createClass({
   propTypes: {
     leapState: PropTypes.oneOf(["OFF","ON"])
    },
-   getDefaultProps() {
+   
+   getInitialState: function () {
     return {
-      leapState: "OFF"
-    }
+      leapState : "OFF"
+    };
   },
-    render() {
-      if (this.props.leapState === "ON") {
-        return(<p>state is on</p>);
+
+  handleLeapStart(){ 
+    console.log("start leap");
+    this.setState({leapState : "ON"});
+   },
+  handleLeapStop(){
+    console.log("stop leap");
+    this.setState({leapState:"OFF"});
+  },
+  render() {
+      if (this.state.leapState === "ON") {
+        return(<Button onClick={this.handleLeapStop} bsStyle="danger">Stop</Button>);
       } else {
-        return(<p>state is off</p>);
+        return(<Button onClick={this.handleLeapStart} bsStyle="danger">Start</Button>);
       }
     }
 });
