@@ -30,7 +30,7 @@ export default React.createClass({
   handleClear(e) {
     ActionCreator.clearList();
   },
-
+  
   render() {
     let {tasks} = this.state;
     return (

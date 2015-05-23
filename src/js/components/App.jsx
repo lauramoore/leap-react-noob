@@ -4,12 +4,19 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import TaskList from './TaskList.jsx';
 
 var LeapState = React.createClass({
-    
+  propTypes: {
+    leapState: PropTypes.oneOf(["OFF","ON"])
+   },
+   getDefaultProps() {
+    return {
+      leapState: "OFF"
+    }
+  },
     render() {
-      if (this.props.leapState === 0) {
-        return(<p>state is off</p>);
-      } else {
+      if (this.props.leapState === "ON") {
         return(<p>state is on</p>);
+      } else {
+        return(<p>state is off</p>);
       }
     }
 });
@@ -23,13 +30,12 @@ export default React.createClass({
 
   getDefaultProps() {
     return {
-      tasks: [],
-      leapState: 0
+      tasks: []
     }
   },
 
   render() {
-    let {onAddTask, onClear, tasks, leapState} = this.props;
+    let {onAddTask, onClear, tasks} = this.props;
     return (
       <div className="container">
         <Jumbotron>
@@ -39,7 +45,7 @@ export default React.createClass({
             Most features are left unimplemented with clues to guide you on the learning process.
           </p>
         </Jumbotron>
-        <LeapState leapState={leapState}/>
+        <LeapState />
         <TaskList tasks={tasks} />
 
         <Button onClick={onAddTask} bsStyle="primary">Add New</Button>

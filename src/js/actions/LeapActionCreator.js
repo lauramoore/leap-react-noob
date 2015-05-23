@@ -7,7 +7,8 @@ export default {
       type: Constants.ActionTypes.START_LEAP
     });
   },
-  startLeap() {
+  
+  stopLeap() {
     Dispatcher.handleViewAction({
       type: Constants.ActionTypes.STOP_LEAP
     });
