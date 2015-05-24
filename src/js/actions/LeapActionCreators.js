@@ -1,7 +1,8 @@
 import Dispatcher from '../Dispatcher';
 import Constants from '../Constants';
-//import Leap from require('leapjs').Leap;
+import Leap from 'leapjs';
 
+console.log(Leap);
 //var controller = new Leap.Controller({frameEventName: 'animationFrame'});
   //this.controller.on('frame', this.leapLoop);
   //this.controller.on('connect', function(){
