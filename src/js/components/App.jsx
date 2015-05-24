@@ -26,7 +26,7 @@ var LeapState = React.createClass({
       if (this.state.leapState === "ON") {
         return(<Button onClick={this.handleLeapStop} bsStyle="danger">Stop</Button>);
       } else {
-        return(<Button onClick={this.handleLeapStart} bsStyle="danger">Start</Button>);
+        return(<Button onClick={this.handleLeapStart} bsStyle="primary">Start</Button>);
       }
     }
 });
