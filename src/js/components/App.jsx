@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react';
 import Button from 'react-bootstrap/lib/Button';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import TaskList from './TaskList.jsx';
+import LeapActions from '../actions/LeapActionCreators';
 
 var LeapState = React.createClass({
   propTypes: {
@@ -16,10 +17,13 @@ var LeapState = React.createClass({
 
   handleLeapStart(){ 
     console.log("start leap");
+    LeapActions.startLeap();
     this.setState({leapState : "ON"});
    },
+   
   handleLeapStop(){
     console.log("stop leap");
+    LeapActions.stopLeap();
     this.setState({leapState:"OFF"});
   },
   render() {
