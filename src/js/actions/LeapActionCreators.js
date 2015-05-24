@@ -2,17 +2,23 @@ import Dispatcher from '../Dispatcher';
 import Constants from '../Constants';
 import Leap from 'leapjs';
 
-console.log(Leap);
-//var controller = new Leap.Controller({frameEventName: 'animationFrame'});
-  //this.controller.on('frame', this.leapLoop);
-  //this.controller.on('connect', function(){
-    //  console.log("Leap connected");
-  //});
 
-export default {
+
+let controller = new Leap.Controller({frameEventName: 'animationFrame'});
+console.log(controller);
+  //this.controller.on('frame', this.leapLoop);
+controller.on('connect', function(){
+    console.log("Leap connected");
+});
+controller.on('disconnect', function(){
+    console.log("Leap disconnected");
+});
+function leapLoop(_frame){
+}
+const LeapActions = {
   startLeap() {
     console.log("startLeap, calling connect controller");
-    //this.controller.connect();
+    controller.connect();
     //Dispatcher.handleViewAction({
       //type: Constants.ActionTypes.START_LEAP
     //});
@@ -20,18 +26,16 @@ export default {
   
   stopLeap() {
     console.log("startLeap, calling disconnect controller");
-    //this.controller.disconnect();
+    controller.disconnect();
     //Dispatcher.handleViewAction({
       //type: Constants.ActionTypes.STOP_LEAP
     //});
   },
   
   leapLoop(_frame){
-     console.log(_frame);
-     //Dispatcher.handleViewAction({
-      //type: Constants.ActionTypes.LEAP_LOOP,
-      //frame : _frame;
-    //});
+     console.log(["leapLoop", _frame]);
   }
-
+  
 };
+
+export default LeapActions;
