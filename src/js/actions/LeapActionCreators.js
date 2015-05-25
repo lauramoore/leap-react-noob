@@ -15,13 +15,13 @@ controller.on('disconnect', function(){
 });
 
 function leapLoop(_frame){
-   if (_frame.hands.length == 0 ) {
-      Dispatcher.handleViewAction({
-        type: Constants.ActionTypes.NO_HANDS
-      });
-      return;
+   let handList = _frame.hands;
+   if (handList.length > 0 ) {
+     Dispatcher.handleViewAction({
+       type: Constants.ActionTypes.NEW_HAND,
+       hand: handList[0]
+     });
    }
-   console.log(_frame.hands[0]);
 }
 controller.on('frame', leapLoop);
 const LeapActions = {
