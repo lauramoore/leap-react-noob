@@ -1,7 +1,7 @@
 
-# LeapColor (leapcolor)
+# Leap React Noob (leap-react-noob)
 
-> leap motion react flux demo
+> Experiments with using LeapMotion.js to dive React.js components.
 
 ## Running your project
 
