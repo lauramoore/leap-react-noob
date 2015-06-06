@@ -4,16 +4,34 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import LeapState from './LeapStatus.jsx';
 import HandStore from '../stores/HandStore';
 
-function colorForPitch(hand){
-  if (! hand) return 'grey';
-  var pitchVal = hand['pitch'];
-  if (pitchVal > 0) {
-    return 'blue';
-  } if (pitchVal < 0) {
-     return 'red';
-  } else {
-     return 'grey';
+function toggleColorByPitch(hand){
+  var noHandColor = 'grey';
+  var upColor = 'blue';
+  var downColor = 'red';
+  
+  function resolveBackgroundFromPitch(){
+    if (! hand) return noHandColor;
+      var pitchVal = hand['pitch'];
+      if (pitchVal > 0) {
+         return upColor;
+      } if (pitchVal < 0) {
+         return downColor;
+      } else {
+         return noHandColor;
+      }
   }
+  return {
+     backgroundColor :  resolveBackgroundFromPitch()
+  };
+  
+}
+
+function slideWithHand(hand) {
+      var styles = {
+       background : 'linear-gradient(to right, red 50%, blue 50%)'
+    }
+    
+    return styles;
 }
 
 export default React.createClass({
@@ -49,9 +67,7 @@ export default React.createClass({
        jumbotronMessage = <p>Put Hand Over Leap Motion</p>
     }
     
-    var styles = {
-       backgroundColor : colorForPitch(hand)
-    }
+    var styles = toggleColorByPitch(this.state.hand);
     
     return (
       <div className="container">
