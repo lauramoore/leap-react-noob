@@ -16,21 +16,24 @@ function computeGradient(factor){
 }
 export default React.createClass({
    _onChange() {
-    
+    var newState = HandStore.getYPosition();
+    this.setState(newState);
   },
 
   getInitialState() {
       return {
-       yPos : 50
+       x : 0,
+       y : 50,
+       z : 0
     }
   },
 
   componentDidMount() {
-   
+    HandStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount() {
-   
+    HandStore.removeChangeListener(this._onChange);
   },
 
   getDefaultState() {
@@ -38,14 +41,14 @@ export default React.createClass({
   },
 
   render() {
-      var styles = computeGradient(this.state.yPos);
+      var styles = computeGradient(this.state.y);
     
     return (
 
         <Jumbotron style={styles}>
           <h1>Demo Hand Position Tracking</h1>
           <p>Slide Hand Left and Right to change Gradient</p>
-          <p> {this.state.yPos} </p>
+          <p>  {this.state.x}, {this.state.y}, {this.state.z} </p>
         </Jumbotron>
     );
   }

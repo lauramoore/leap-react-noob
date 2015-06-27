@@ -9,7 +9,6 @@ let _hand = undefined;
 // add private functions to modify data
 function updateHand(hand) {
   _hand = hand;
-  //console.log(hand);
 }
 
 // Facebook style store creation.
@@ -28,6 +27,21 @@ const HandStore = assign({}, BaseStore, {
 		  roll: 0
 		};
 	}
+  },
+  
+  getYPosition(){
+     if (_hand) {
+        return {
+          x : _hand.palmPosition[0], 
+          y : _hand.palmPosition[1],
+          z : _hand.palmPosition[2]
+        }
+     }
+       return {
+          x : 0, 
+          y : 0,
+          z : 0
+        }
   },
 
   // register store with dispatcher, allowing actions to flow through
