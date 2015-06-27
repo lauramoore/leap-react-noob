@@ -1,7 +1,5 @@
 import React, {PropTypes} from 'react';
-import Button from 'react-bootstrap/lib/Button';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
-import LeapState from './LeapStatus.jsx';
 import HandStore from '../stores/HandStore';
 
 function toggleColorByPitch(hand){
@@ -62,13 +60,11 @@ export default React.createClass({
     var styles = toggleColorByPitch(this.state.hand);
     
     return (
-      <div className="container">
+
         <Jumbotron style={styles}>
           <h1>LeapMotion</h1>
           {jumbotronMessage}
         </Jumbotron>
-        <LeapState />
-      </div>
     );
   }
 });

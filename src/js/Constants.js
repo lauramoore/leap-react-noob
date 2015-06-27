@@ -6,7 +6,6 @@ export default {
 
   // Each time you add an action, add it here
   ActionTypes: keyMirror({
-    ADD_TASK: null,
     START_LEAP: null,
     STOP_LEAP: null
   }),
