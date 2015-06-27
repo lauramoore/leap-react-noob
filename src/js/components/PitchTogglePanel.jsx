@@ -52,7 +52,7 @@ export default React.createClass({
     var hand = this.state.hand;
     var jumbotronMessage;
     if (hand) {
-       jumbotronMessage = <p>TODO Show Hand Info</p>
+       jumbotronMessage = <p>Rotate Hand to Change Color</p>
     } else {
        jumbotronMessage = <p>Put Hand Over Leap Motion</p>
     }
