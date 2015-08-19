@@ -7,8 +7,8 @@ function computeGradient(factor){
    var maxRed = 95;
     //convert factor to percent of 95, floor at 5
     var redPartFactor = maxRed * (1 - (factor/100))
-   var gradientParts = ['to right', 'red' ,'blue'];
-   gradientParts[1] = 'red '+ redPartFactor + '%';
+   var gradientParts = ['to right', 'blue' ,'red'];
+   gradientParts[2] = 'red '+ redPartFactor + '%';
    console.log(gradientParts.join());
    return {
     background: 'linear-gradient(' + gradientParts.join() +')'
@@ -22,8 +22,8 @@ export default React.createClass({
 
   getInitialState() {
       return {
-       x : 0,
-       y : 50,
+       x : 50,
+       y : 0,
        z : 0
     }
   },
@@ -41,7 +41,7 @@ export default React.createClass({
   },
 
   render() {
-      var styles = computeGradient(this.state.y);
+      var styles = computeGradient(this.state.x);
     
     return (
 

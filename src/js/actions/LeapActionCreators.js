@@ -3,7 +3,7 @@ import Constants from '../Constants';
 import Leap from 'leapjs';
 
 
-
+//Set up Controller to generate 60 frames per second
 let controller = new Leap.Controller({frameEventName: 'animationFrame'});
 //console.log(controller);
 
@@ -13,7 +13,7 @@ controller.on('connect', function(){
 controller.on('disconnect', function(){
     console.log("Leap disconnected");
 });
-
+//Every frame grab data and generate Action via Dispatcher
 function leapLoop(_frame){
    let handList = _frame.hands;
    if (handList.length > 0 ) {
@@ -23,7 +23,10 @@ function leapLoop(_frame){
      });
    }
 }
+//Register the loop with the Leap Contoller
 controller.on('frame', leapLoop);
+
+//Create actions to start and stop controller
 const LeapActions = {
   startLeap() {
     console.log("startLeap, calling connect controller");
