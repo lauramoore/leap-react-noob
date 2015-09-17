@@ -11,7 +11,8 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    plotter = new LeapDataPlotter.LeapDataPlotter(React.findDOMNode(this));
+     var plotterOptions = { el: React.findDOMNode(this.refs.leapPlotCanvas) };
+     plotter = new LeapDataPlotter.LeapDataPlotter( plotterOptions );
   },
 
   componentWillUnmount() {
@@ -23,11 +24,15 @@ export default React.createClass({
   },
 
   render() {
-    if (plotter) {
-       plotter.plot("tbd", 1);
-    }
+    // call this once per frame per plot
+    if(plotter) {
+      plotter.plot('height', 1 , {
+        precision: 3,
+        units: 'mm'
+      });
+    };
     return (
-      <div>todo?</div>
+     <canvas ref="leapPlotCanvas" height="100" width="200"></canvas>
     );
   }
 });
