@@ -9,7 +9,6 @@ function computeGradient(factor){
     var redPartFactor = maxRed * (1 - (factor/100))
    var gradientParts = ['to right', 'blue' ,'red'];
    gradientParts[2] = 'red '+ redPartFactor + '%';
-   console.log(gradientParts.join());
    return {
     background: 'linear-gradient(' + gradientParts.join() +')'
    };
