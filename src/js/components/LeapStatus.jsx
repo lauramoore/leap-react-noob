@@ -1,6 +1,7 @@
-import LeapActions from '../actions/LeapActionCreators';
+import Constants from '../Constants';
 import React, {PropTypes} from 'react';
 import Button from 'react-bootstrap/lib/Button';
+import Dispatcher from '../Dispatcher';
 
 export default React.createClass({
   propTypes: {
@@ -14,14 +15,16 @@ export default React.createClass({
   },
 
   handleLeapStart(){ 
-    console.log("start leap");
-    LeapActions.startLeap();
+    Dispatcher.handleViewAction({
+       type: Constants.ActionTypes.START_LEAP
+    });
     this.setState({leapState : "ON"});
    },
    
   handleLeapStop(){
-    console.log("stop leap");
-    LeapActions.stopLeap();
+    Dispatcher.handleViewAction({
+       type: Constants.ActionTypes.STOP_LEAP
+    });
     this.setState({leapState:"OFF"});
   },
   render() {

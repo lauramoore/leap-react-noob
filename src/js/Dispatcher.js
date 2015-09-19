@@ -25,6 +25,7 @@ export default assign(new Dispatcher(), {
    * that actions triggered here originated on the client-side
    **/
   handleViewAction(action) {
+    console.log(action);
     this.dispatch({
       source: Constants.ActionSources.VIEW_ACTION,
       action: action
