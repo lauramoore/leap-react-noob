@@ -15,7 +15,7 @@ function computeGradient(factor){
 }
 export default React.createClass({
    _onChange() {
-    var newState = HandStore.getYPosition();
+    var newState = HandStore.getPosition(0);
     this.setState(newState);
   },
 

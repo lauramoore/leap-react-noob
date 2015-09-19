@@ -17,39 +17,43 @@ function updateHand(handList) {
   //trusting here that event senders only send in valid lists with at least one hand
   _handList = handList;
   _firstHand = handList[0];
-}
+};
+
+function convertPosition(hand){
+  if (! hand) {
+      return { x: 0, y:0, z:0 };
+  } 
+  /*
+   * Putting axis names on the vectors that Leap SDK prefers
+   */
+  return {
+     x : hand.palmPosition[0],
+     y : hand.palmPosition[1],
+     z : hand.palmPosition[2]
+  };
+};
 
 // Facebook style store creation.
 const HandStore = assign({}, BaseStore, {
-  getPitchYawRoll() {
-    if (_firstHand) {
-		return {
-		  pitch: _firstHand.pitch(),
-		  yaw: _firstHand.yaw(),
-		  roll: _firstHand.roll()
-		};
-	} else {
-	   return {
-		  pitch: 0,
-		  yaw: 0,
-		  roll: 0
-		};
-	}
-  },
-  
-  getYPosition(){
-     if (_firstHand) {
-        return {
-          x : _firstHand.palmPosition[0], 
-          y : _firstHand.palmPosition[1],
-          z : _firstHand.palmPosition[2]
-        }
-     }
-       return {
-          x : 0, 
-          y : 0,
-          z : 0
-        }
+  /*
+   * Get a Hand object
+   * @param - handId (optional)
+   *  IF no handId will return first Hand from handsList - with no promise from frame to
+   *  frame that the same hand will be returned.  But if you are only tracking one hand 
+   *  works fine
+   *  IF handID
+   *  uniqueId per tracked hand is provided by Leap,  this will stay persistent frame to
+   *  frame and let you know when a hand enters or leaves frames.
+   *  Otherwise hand can be postion in array?
+   */
+  getPosition: function(handId) {
+    if (! handId) {
+      return convertPosition(_firstHand);
+    } else if ( _handList.length > handId ) {
+       return convertPosition( _handList[handId]);
+    } else  {
+      return convertPosition(undefined);
+    }
   },
 
   // register store with dispatcher, allowing actions to flow through

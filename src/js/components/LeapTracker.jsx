@@ -5,10 +5,10 @@ import HandStore from '../stores/HandStore';
 var plotter;
 export default React.createClass({
    _onChange() {
-    var handPos = HandStore.getYPosition();
+    var handPos = HandStore.getPosition(0);
     if(plotter) {
        console.log(handPos);
-      plotter.plot('height', handPos.x );
+      plotter.plot('height', handPos.y );
       plotter.update();
     };
   },

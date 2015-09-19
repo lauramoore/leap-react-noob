@@ -21,16 +21,17 @@ import assign from 'object-assign';
 import Leap from 'leapjs';
 
 //Not sure if these belong here -- or better off as ActionCreator?
-function setHands(_handList){
+function setHands(handList){
   //I know doing these asserts will annoy some folks, #Keep Code Left
   //Update hands when we have a hand
-  if ( ! _handList ) return;
-  if (_handList.length == 0 )  return;
+  if ( ! handList ) return;
+  if (handList.length == 0 )  return;
   //if we have handList let the world know about it
    Dispatcher.handleViewAction({
        type: Constants.ActionTypes.NEW_HAND,
-       hand: _handList
+       hand: handList
    });
+   
    //TODO - perhaps we also care about when all hands are gone? clearing stores?
  }
 
@@ -58,7 +59,6 @@ controller.on('frame', function(_frame) {
 // Facebook style store creation.
 const LeapMotionStore = assign({}, BaseStore, {
 
-
  // register store with dispatcher, allowing actions to flow through
   dispatcherIndex: Dispatcher.register(function(payload) {
     let action = payload.action;
@@ -72,7 +72,6 @@ const LeapMotionStore = assign({}, BaseStore, {
         controller.disconnect();
         break;
     }
-    
   })
 
 });
