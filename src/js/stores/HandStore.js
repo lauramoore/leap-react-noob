@@ -55,7 +55,6 @@ const HandStore = assign({}, BaseStore, {
   // register store with dispatcher, allowing actions to flow through
   dispatcherIndex: Dispatcher.register(function(payload) {
     let action = payload.action;
-    console.log(action);
     switch(action.type) {
       case Constants.ActionTypes.NEW_HAND:
           updateHand(payload.action.hand);
