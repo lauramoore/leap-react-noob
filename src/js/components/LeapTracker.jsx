@@ -35,7 +35,7 @@ export default React.createClass({
 
   render() {
     return (
-     <canvas ref="leapPlotCanvas" height="100" width="200"></canvas>
+     <canvas ref="leapPlotCanvas" height="990" width="330"></canvas>
     );
   }
 });

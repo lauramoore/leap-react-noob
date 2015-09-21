@@ -33,6 +33,16 @@ function convertPosition(hand){
   };
 };
 
+function convertGrab(hand){
+  if (! hand) {
+      return { strength: 0 };
+  } 
+  /*
+   * Putting axis names on the vectors that Leap SDK prefers
+   */
+  return { strength: hand.grabStrength };
+};
+
 // Facebook style store creation.
 const HandStore = assign({}, BaseStore, {
   /*
@@ -53,6 +63,16 @@ const HandStore = assign({}, BaseStore, {
        return convertPosition( _handList[handId]);
     } else  {
       return convertPosition(undefined);
+    }
+  },
+  
+  grabStrength: function(handId) {
+    if (! handId) {
+      return convertGrab(_firstHand);
+    } else if ( _handList.length > handId ) {
+       return convertGrab( _handList[handId]);
+    } else  {
+      return convertGrab(undefined);
     }
   },
 
