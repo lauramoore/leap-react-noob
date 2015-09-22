@@ -39,6 +39,7 @@
     "leapjs": "^0.6.4",
     "leapjs-plugins": "^0.1.11-pre",
     "object-assign": "^2.0.0",
+    "pixi.js": "^3.0.7",
     "plotter": "^0.5.0",
     "react": "^0.13.3",
     "react-bootstrap": "^0.22.6"

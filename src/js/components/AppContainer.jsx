@@ -2,7 +2,7 @@ import React from 'react';
 import LeapState from './LeapStatus.jsx';
 import SliderPanel from './SliderPanel.jsx';
 import GrabPanel from './GrabPanel.jsx';
-import Tracker from './LeapTracker.jsx';
+import PixiPanel from './PixiPanel.jsx';
 
 export default React.createClass({
   
@@ -24,7 +24,7 @@ export default React.createClass({
       </tr>
       <tr>
         <td>
-           <Tracker />
+           <PixiPanel />
         </td>
       </tr>
       </table>
