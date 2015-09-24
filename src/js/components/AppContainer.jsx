@@ -24,7 +24,7 @@ export default React.createClass({
       </tr>
       <tr>
         <td>
-           <PixiPanel />
+           <PixiPanel width="990" height="330" />
         </td>
       </tr>
       </table>

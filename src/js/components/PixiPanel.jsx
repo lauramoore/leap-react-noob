@@ -11,11 +11,28 @@ export default React.createClass({
      return {
     }
   },
+   /**
+    * Lifted from react-pixi to add Pixi to view
+    */
+  componentDidMount: function() {
+    var props = this.props;
+    
+    var backgroundcolor = (typeof props.backgroundcolor === "number") ? props.backgroundcolor : 0x1099bb;
+    var stage = new PIXI.Container();
+    var renderer = PIXI.autoDetectRenderer(990,  330, 
+                                           {view: React.findDOMNode(this.refs.pixiCanvas),
+                                           backgroundColor : 0x1099bb});
+                                           
+    var graphics = new PIXI.Graphics();
+    graphics.beginFill(0xFFFF00);
+    // set the line style to have a width of 5 and set the color to red
+    graphics.lineStyle(5, 0xFF0000);
 
-  componentDidMount() {
-     var renderer = new PIXI.CanvasRenderer(990, 330);
-     var containerNode = React.findDOMNode(this.refs.pixiDiv);
-     HandStore.addChangeListener(this._onChange);
+    // draw a rectangle
+    graphics.drawRect(0, 0, 300, 200);
+
+    stage.addChild(graphics);
+    renderer.render(stage);
   },
 
   componentWillUnmount() {
@@ -23,13 +40,11 @@ export default React.createClass({
   },
 
   getDefaultState() {
-    return {
-    }
   },
-
+  
   render() {
-    return (
-     <div ref="pixiDiv"></div>
+   return (
+     <canvas ref="pixiCanvas" height="990" width="330"></canvas>
     );
   }
 });
