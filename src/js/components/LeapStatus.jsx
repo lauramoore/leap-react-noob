@@ -1,37 +1,37 @@
 import Constants from '../Constants';
 import React, {PropTypes} from 'react';
 import Button from 'react-bootstrap/lib/Button';
-import Dispatcher from '../Dispatcher';
-
-export default React.createClass({
-  propTypes: {
-    leapState: PropTypes.oneOf(["OFF","ON"])
-   },
-   
-   getInitialState: function () {
+import ControllerActions from '../actions/ControllerActions';
+/**
+ * Borrowed from Rhttps://react-bootstrap.github.io/components.html
+ * Loading Button as a Toggle of State instead
+ */
+const LeapStatus = React.createClass({
+  getInitialState() {
     return {
-      leapState : "OFF"
+      isTracking: false
     };
   },
 
-  handleLeapStart(){ 
-    Dispatcher.handleViewAction({
-       type: Constants.ActionTypes.START_LEAP
-    });
-    this.setState({leapState : "ON"});
-   },
-   
-  handleLeapStop(){
-    Dispatcher.handleViewAction({
-       type: Constants.ActionTypes.STOP_LEAP
-    });
-    this.setState({leapState:"OFF"});
-  },
   render() {
-    if (this.state.leapState === "ON") {
-      return(<Button onClick={this.handleLeapStop} bsStyle="danger">Stop</Button>);
+    let isTracking = this.state.isTracking;
+    return (
+      <Button
+        bsStyle= { isTracking ? "danger" : "success"}
+        onClick={this.handleClick}>
+        {isTracking ? 'Stop' : 'Start'}
+      </Button>
+    );
+  },
+
+  handleClick() {
+    if (this.state.isTracking) {
+      ControllerActions.stopTracking();
     } else {
-       return(<Button onClick={this.handleLeapStart} bsStyle="primary">Start</Button>);
+      ControllerActions.startTracking();
     }
+    this.setState({isTracking: (! this.state.isTracking )});
   }
 });
+
+module.exports = LeapStatus;
