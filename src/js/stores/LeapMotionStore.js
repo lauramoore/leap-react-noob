@@ -38,7 +38,7 @@ function handPostiions(){
          if (hand.valid) {
            hands.push( {
               centerPoint : normalizeVector(hand.palmPosition),
-              roll : handl.roll();
+              roll : hand.roll()
             });
          };
       });
