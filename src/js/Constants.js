@@ -7,7 +7,8 @@ export default {
   // Each time you add an action, add it here
   ActionTypes: keyMirror({
     START_LEAP: null,
-    STOP_LEAP: null
+    STOP_LEAP: null,
+    NEW_HAND: null
   }),
 
   ActionSources: keyMirror({

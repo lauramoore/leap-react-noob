@@ -5,7 +5,7 @@ import assign from 'object-assign';
 
 // data storage
 
-let _puppets = [];
+let _puppet = undefined;
 
 function FingerPuppet(hand){
     this.x = hand.palmPosition[0];
@@ -20,10 +20,14 @@ function FingerPuppet(hand){
  * //When start tracking more than one hand, have to decide if id matters?
  */
 function updateActivePuppets(handList) {
-  for (var i = handList.length - 1; i >= 0; i--) {
-     //for example here is new puppet, but maybe we simply want to update each?
-    _puppets.push(new FingerPuppet(handList[i]));
-  };
+      if (handList.length == 0) return;
+      var puppetPostion = Lepa.
+      if (_puppet) {
+          _puppet.delaty  = handList[0].palmVelocity[1];
+          _puppet.deltax  = handList[0].palmVelocity[0];
+      } else {
+         _puppet = new FingerPuppet(handList[0]);
+      }
 };
 
 
@@ -33,7 +37,7 @@ const FingerPuppetStore = assign({}, BaseStore, {
    * track key drawing values for each puppet
    */
   getPuppets : function() {
-    return _puppets;
+    return _puppet;
   },
 
   // register store with dispatcher, allowing actions to flow through

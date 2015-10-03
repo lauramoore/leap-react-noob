@@ -19,13 +19,14 @@ function updateHand(handList) {
   _firstHand = handList[0];
 };
 
-function convertPosition(hand){
+function convertPosition(hand, interactionBox){
   if (! hand) {
       return { x: 0, y:0, z:0 };
   } 
   /*
    * Putting axis names on the vectors that Leap SDK prefers
    */
+   var palmNormalized = 
   return {
      x : hand.palmPosition[0],
      y : hand.palmPosition[1],

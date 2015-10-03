@@ -33,13 +33,12 @@ function setHands(handList){
    });
    
    //TODO - perhaps we also care about when all hands are gone? clearing stores?
- }
+ };
 
 //Private Data Methods to Interact with Leap Controller
 // Leap Controller to record frames 60 per sec
 let controller = new Leap.Controller({frameEventName: 'animationFrame'});
-//Current or most recent recoded frame
-let currentFrame = {};
+let storedFrame;
 
 
 //register default controller events for debugging.
@@ -52,13 +51,19 @@ controller.on('disconnect', function(){
 
 //Register the loop with the Leap Contoller
 controller.on('frame', function(_frame) {
-   setHands(_frame.hands);
+    if (! _frame.valid) return;
+    setHands(_frame.hands);
+    storedFrame = _frame;
+    LeapMotionStore.emitChange();
+
    //TODO - additional data sets (Gestures, 
 });
 
 // Facebook style store creation.
 const LeapMotionStore = assign({}, BaseStore, {
-
+  getFrame() {
+      return storedFrame;
+  },
  // register store with dispatcher, allowing actions to flow through
   dispatcherIndex: Dispatcher.register(function(payload) {
     let action = payload.action;
