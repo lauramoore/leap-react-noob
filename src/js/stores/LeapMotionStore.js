@@ -20,23 +20,39 @@ import BaseStore from './BaseStore';
 import assign from 'object-assign';
 import Leap from 'leapjs';
 
+function normalizeVector(array) {
+     //point is an array of xyz
+     return storedFrame.interactionBox.normalizePoint(array);
+
+};
+
+
 //Not sure if these belong here -- or better off as ActionCreator?
-function setHands(handList){
-  //I know doing these asserts will annoy some folks, #Keep Code Left
-  //Update hands when we have a hand
-  if ( ! handList ) return;
-  if (handList.length == 0 )  return;
-  //if we have handList let the world know about it
-   Dispatcher.handleViewAction({
-       type: Constants.ActionTypes.NEW_HAND,
-       hand: handList
-   });
+function handPostiions(){
+   var handList = storedFrame.hands;
    
-   //TODO - perhaps we also care about when all hands are gone? clearing stores?
+   if (handList.length > 0 ) {
+      //extract only the palmPostion
+      var hands = [];
+      handList.forEach(function(hand){
+         if (hand.valid) {
+           hands.push( {
+              centerPoint : normalizeVector(hand.palmPosition),
+              roll : handl.roll();
+            });
+         };
+      });
+      return hands;
+   }
  };
+
+ function interactionBox() {
+     return storedFrame.interactionBox;
+ }
 
 //Private Data Methods to Interact with Leap Controller
 // Leap Controller to record frames 60 per sec
+//screenPosition plugin 
 let controller = new Leap.Controller({frameEventName: 'animationFrame'});
 let storedFrame;
 
@@ -52,17 +68,19 @@ controller.on('disconnect', function(){
 //Register the loop with the Leap Contoller
 controller.on('frame', function(_frame) {
     if (! _frame.valid) return;
-    setHands(_frame.hands);
     storedFrame = _frame;
+    interactionBox = _frame.interactionBox;
     LeapMotionStore.emitChange();
-
-   //TODO - additional data sets (Gestures, 
 });
 
 // Facebook style store creation.
 const LeapMotionStore = assign({}, BaseStore, {
   getFrame() {
       return storedFrame;
+  },
+  getHands() {
+    return handPostiions();
+
   },
  // register store with dispatcher, allowing actions to flow through
   dispatcherIndex: Dispatcher.register(function(payload) {

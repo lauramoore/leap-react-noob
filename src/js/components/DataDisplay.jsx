@@ -8,8 +8,8 @@ export default React.createClass({
   _onChange() {
     //gets the current frame
     var frame = LeapMotionStore.getFrame();
-    console.log(frame);
-    this.setState({frame : LeapMotionStore.getFrame()});
+    this.setState({frame : LeapMotionStore.getFrame(),
+                   hands : LeapMotionStore.getHands()});
     
   },
 
@@ -24,9 +24,14 @@ export default React.createClass({
   render() {
     var displayableFrame = React.addons;
     return (
-      <Well>
-      <ObjectInspector data={this.state.frame} />
-      </Well>
+      <div>
+        <Well>
+          <ObjectInspector data={this.state.frame} />
+        </Well>
+        <Well>
+           {this.state.hands}
+        </Well>
+      </div>
     );
   }
 });
