@@ -34,11 +34,13 @@ function handPostiions(){
    if (handList.length > 0 ) {
       //extract only the palmPostion
       var hands = [];
-      handList.forEach(function(hand){
+      handList.forEach(function(hand, index){
          if (hand.valid) {
            hands.push( {
-              centerPoint : normalizeVector(hand.palmPosition),
-              roll : hand.roll()
+              //using stablized instead of palmPosition
+              centerPoint : normalizeVector(hand.stabilizedPalmPosition),
+              roll : hand.roll(),
+              key : hand.id || index
             });
          };
       });
