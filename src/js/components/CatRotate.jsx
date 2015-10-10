@@ -17,10 +17,35 @@ var Cat = React.createClass({
   }
 })
 
+function sortHands(handsArray) {
+  // return undefined if no array
+  if (! handsArray) return;
+  //if 0 or 1 hand, no sorting called for
+  if (handsArray.length < 2) return handsArray;
+  var sortedHands = handsArray.slice(0);
+
+  return sortedHands.sort(
+    function(a, b) {
+      return a.centerPoint[0] - b.centerPoint[0];
+    }   
+  );
+
+}
+
 export default React.createClass({
 
   _onChange() {
-    this.setState({ hands: LeapMotionStore.getHands() });
+    /**
+     * Experiment : magic backwards hands....
+     * Instead of sorting the hands by X position just 
+     * use array straight from HandStore...  then hands
+     * order in array is determined only by time in frame.
+     * add right hand first, then left and your cats will be
+     * backwards
+     */
+     //var hands = LeapMotionStore.getHands();
+     var hands = sortHands(LeapMotionStore.getHands());
+    this.setState({ hands: hands });
   },
 
   componentDidMount() {

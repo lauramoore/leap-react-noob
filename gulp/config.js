@@ -31,7 +31,7 @@ module.exports = {
     debug: gutil.env.type === 'dev'
   },
   html: {
-    src: 'src/index.html',
+    src: 'src/*.html',
     dest: dest
   },
   watch: {
