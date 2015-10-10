@@ -17,8 +17,11 @@ function computeGradient(distance){
 }
 export default React.createClass({
    _onChange() {
+    var handList = LeapMotionStore.getHands();
+    if (! handList || handList.length < 2) return;
+    var handSpread = Math.abs(handList[0].centerPoint[0] - handList[1].centerPoint[0]);
     this.setState({
-      styles : computeGradient(0)
+      styles : computeGradient(handSpread)
     });
   },
 
