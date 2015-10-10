@@ -2,10 +2,9 @@ import React, {PropTypes} from 'react';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import LeapMotionStore from '../stores/LeapMotionStore';
 
-function computeGradient(factor){
+function computeGradient(distance){
    var length = 100;
-   var distance = 0;
-   var  outside = length / 2;
+   var  outside = (length - distance) / 2;
    var a = outside;
    var b = outside + distance;
    return {
@@ -19,7 +18,7 @@ function computeGradient(factor){
 export default React.createClass({
    _onChange() {
     this.setState({
-      styles : computeGradient()
+      styles : computeGradient(0)
     });
   },
 
