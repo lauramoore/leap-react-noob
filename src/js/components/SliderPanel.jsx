@@ -3,8 +3,11 @@ import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import LeapMotionStore from '../stores/LeapMotionStore';
 
 function computeGradient(factor){
-   var a = 28;
-   var b = 83;
+   var length = 100;
+   var distance = 0;
+   var  outside = length / 2;
+   var a = outside;
+   var b = outside + distance;
    return {
     background: 'linear-gradient(to right, ' 
                 + 'rgba(239,195,206,1) 0%, ' 
