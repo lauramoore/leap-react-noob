@@ -1,53 +1,40 @@
 import React, {PropTypes} from 'react';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
-import HandStore from '../stores/HandStore';
+import LeapMotionStore from '../stores/LeapMotionStore';
 
 function computeGradient(factor){
-   var minRed = 5;
-   var maxRed = 95;
-    //convert factor to percent of 95, floor at 5
-    var redPartFactor = maxRed * (1 - (factor/100))
-   var gradientParts = ['to right', 'blue' ,'red'];
-   gradientParts[2] = 'red '+ redPartFactor + '%';
    return {
-    background: 'linear-gradient(' + gradientParts.join() +')'
+    background: 'linear-gradient(to right, ' 
+                + 'rgba(239,195,206,1) 0%, ' 
+                + 'rgba(185,39,76,1) 28%, '
+                + 'rgba(168,20,60,1) 83%, '
+                +'rgba(241,142,166,1) 100%)'
    };
 }
 export default React.createClass({
    _onChange() {
-    var newState = HandStore.getPosition(0);
-    this.setState(newState);
-  },
-
-  getInitialState() {
-      return {
-       x : 50,
-       y : 0,
-       z : 0
-    }
+    this.setState({
+      styles : computeGradient()
+    });
   },
 
   componentDidMount() {
-    HandStore.addChangeListener(this._onChange);
+    LeapMotionStore.addChangeListener(this._onChange);
   },
 
   componentWillUnmount() {
-    HandStore.removeChangeListener(this._onChange);
+    LeapMotionStore.removeChangeListener(this._onChange);
   },
 
-  getDefaultState() {
-    
+  getInitialState(){
+    return {
+       styles : { background: 'blue' }
+    }
   },
 
   render() {
-      var styles = computeGradient(this.state.x);
-    
     return (
-
-        <Jumbotron style={styles}>
-          <h1>Demo Hand Position Tracking</h1>
-          <p>Slide Hand Left and Right to change Gradient</p>
-          <p>  {this.state.x}, {this.state.y}, {this.state.z} </p>
+        <Jumbotron style={this.state.styles}>
         </Jumbotron>
     );
   }

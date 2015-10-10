@@ -52,6 +52,10 @@ export default React.createClass({
      LeapMotionStore.addChangeListener(this._onChange);
   },
 
+  componentWillUnmount() {
+    LeapMotionStore.removeChangeListener(this._onChange);
+  },
+
   getInitialState() {
     return {};
   },
